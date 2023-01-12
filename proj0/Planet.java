@@ -1,4 +1,4 @@
-public class Body{
+public class Planet {
 	public double xxPos;
 	public double yyPos;
 	public double xxVel;
@@ -7,7 +7,7 @@ public class Body{
 	public String imgFileName;
 	public static final double G = 6.67e-11;
 
-	public Body(double xP, double yP, double xV,
+	public Planet(double xP, double yP, double xV,
               double yV, double m, String img){
 		this.xxPos = xP;
 		this.yyPos = yP;
@@ -17,7 +17,7 @@ public class Body{
 		this.imgFileName = img;
 	}
 
-	public Body(Body b){
+	public Planet(Planet b){
 		this.xxPos = b.xxPos;
 		this.yyPos = b.yyPos;
 		this.xxVel = b.xxVel;
@@ -26,18 +26,18 @@ public class Body{
 		this.imgFileName = b.imgFileName;
 	}
 
-	public double calcDistance(Body b){
+	public double calcDistance(Planet b){
 		double dx = this.xxPos - b.xxPos;
 		double dy = this.yyPos - b.yyPos;
 		return Math.sqrt(dx * dx + dy * dy);
 	}
 
-	public double calcForceExertedBy(Body b){
+	public double calcForceExertedBy(Planet b){
 		double r = calcDistance(b);
 		return (G * this.mass * b.mass) / (r * r);
 	}
 
-	public double calcForceExertedByX(Body b){
+	public double calcForceExertedByX(Planet b){
 		double r = calcDistance(b);
 		double f = calcForceExertedBy(b);
 		double dx = b.xxPos - this.xxPos;
@@ -45,16 +45,16 @@ public class Body{
 
 	}
 
-	public double calcForceExertedByY(Body b){
+	public double calcForceExertedByY(Planet b){
 		double r = calcDistance(b);
 		double f = calcForceExertedBy(b);
 		double dy = b.yyPos - this.yyPos;
 		return f * dy / r;
 	}
 
-	public double calcNetForceExertedByX(Body[] bodys){
+	public double calcNetForceExertedByX(Planet[] planets){
 		double fx = 0;
-		for(Body b : bodys){
+		for(Planet b : planets){
 			if(b.equals(this)) continue;
 			fx += calcForceExertedByX(b);
 		}
@@ -62,9 +62,9 @@ public class Body{
 		
 	}
 
-	public double calcNetForceExertedByY(Body[] bodys){
+	public double calcNetForceExertedByY(Planet[] planets){
 		double fy = 0;
-		for(Body b : bodys){
+		for(Planet b : planets){
 			if(b.equals(this)) continue;
 			fy += calcForceExertedByY(b);
 		}

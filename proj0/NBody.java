@@ -4,7 +4,7 @@ public class NBody{
 		double T = Double.parseDouble(args[0]);
 		double dt = Double.parseDouble(args[1]);
 		String fileName = args[2];
-		Body[] bodies = readBodies(fileName);
+		Planet[] bodies = readBodies(fileName);
 		double radius = readRadius(fileName);
 		StdDraw.setScale(-radius, radius);
 		StdDraw.clear();
@@ -56,12 +56,12 @@ public class NBody{
 		return in.readDouble();
 	}
 
-	public static Body[] readBodies(String fileName){
+	public static Planet[] readBodies(String fileName){
 		In in = new In(fileName);
 		int num = in.readInt();
 		double rd = in.readDouble();
 
-		Body[] bodies = new Body[num];
+		Planet[] bodies = new Planet[num];
 
 		/*
 		 The first two values are the x- and y-coordinates of the initial position; 
@@ -77,7 +77,7 @@ public class NBody{
 			double yyVel = in.readDouble();
 			double mass = in.readDouble();
 			String imgFileName = in.readString();
-			bodies[i] = new Body(xxPos, yyPos, xxVel, yyVel, mass, imgFileName);
+			bodies[i] = new Planet(xxPos, yyPos, xxVel, yyVel, mass, imgFileName);
 
 		}
 		return bodies;
