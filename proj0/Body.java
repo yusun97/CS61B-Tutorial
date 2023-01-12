@@ -86,5 +86,10 @@ public class Body{
 
 	}
 
+	public void draw(){
+		//draw one body
+		StdDraw.picture(this.xxPos, this.yyPos, "./images/" + this.imgFileName);
+	}
+
 
 } 
